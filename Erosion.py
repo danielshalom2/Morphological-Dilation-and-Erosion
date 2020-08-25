@@ -3,8 +3,7 @@
 import cv2
 import numpy as np
 
-def Erosion(img,kernel):
+
+def erosion(img, kernel):
     img_erosion = cv2.erode(img, kernel, iterations=1)
     return img_erosion
-
-
