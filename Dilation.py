@@ -5,5 +5,6 @@ import numpy as np
 
 
 def dilation(img, kernel):
-    img_dilation = cv2.dilate(img, kernel, iterations=1)
+    # img_dilation = cv2.dilate(img, kernel, iterations=1)
+
     return img_dilation
