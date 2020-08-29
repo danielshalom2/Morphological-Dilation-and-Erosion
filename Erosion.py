@@ -5,9 +5,11 @@ import numpy as np
 
 
 def idx_check(kernel, mask):
-    for i in range(mask.shape[0] - 1):
-        for j in range(mask.shape[1] - 1):
-            if int(kernel[i][j]) != mask[i][j]:
+    for i in range(mask.shape[0]):
+        for j in range(mask.shape[1]):
+            if mask[i][j] == 2:
+                continue
+            elif kernel[i][j] != mask[i][j]:
                 return False
     return True
 
@@ -26,9 +28,9 @@ def erosion(img, mask):
 
     for i in range(imgShape[0]):
         for j in range(imgShape[1]):
-            kernel = N[i:i + maskShape[0] - 1, j: j + maskShape[1] - 1]
+            kernel = N[i:i + maskShape[0], j: j + maskShape[1]]
             result = idx_check(kernel, mask)
-            if np.all(result == True):
+            if result:
                 resultImg[i, j] = 1
 
-    return np.uint8(resultImg)
+    return resultImg
