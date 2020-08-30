@@ -1,10 +1,10 @@
-from Erosion import *
-from Dilation import *
+from modules.Erosion import *
+from modules.Dilation import *
 from matplotlib import pyplot as plt
 
 
 def main():
-    img = cv2.imread('circles.jpeg')
+    img = cv2.imread('pictures/circles.jpeg')
     grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     (thresh, binarImg) = cv2.threshold(grayImg, 127, 255, cv2.THRESH_BINARY)  # 1D array
     mask = np.ones((12, 12), np.uint8)
@@ -15,7 +15,7 @@ def main():
     binarImg = binarImg / 255
     img_erosion = erosion(binarImg, mask)
     img_dilation = dilation(binarImg, mask)
-    plt.figure('Input')
+    plt.figure('Input')ד
     plt.subplot(131)
     plt.imshow(grayImg, 'gray')
     plt.subplot(132)
