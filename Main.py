@@ -4,10 +4,10 @@ from matplotlib import pyplot as plt
 
 
 def main():
-    img = cv2.imread('circles')
+    img = cv2.imread('circles.jpeg')
     grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     (thresh, binarImg) = cv2.threshold(grayImg, 127, 255, cv2.THRESH_BINARY)  # 1D array
-    mask = np.ones((1, 2), np.uint8)
+    mask = np.ones((12, 12), np.uint8)
     #mask = np.array([[1, 1, 1],
                      # [1, 1, 1],
                      # [1, 1, 1]
