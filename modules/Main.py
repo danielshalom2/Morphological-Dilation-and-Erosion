@@ -15,7 +15,7 @@ def main():
     binarImg = binarImg / 255
     img_erosion = erosion(binarImg, mask)
     img_dilation = dilation(binarImg, mask)
-    plt.figure('Input')ד
+    plt.figure('Input')
     plt.subplot(131)
     plt.imshow(grayImg, 'gray')
     plt.subplot(132)
