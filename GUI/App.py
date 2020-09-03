@@ -7,6 +7,7 @@ from modules import Dilation
 from matplotlib import pyplot as plt
 import numpy as np
 
+
 class GUI:
     img_path = None
     img = None
@@ -48,26 +49,30 @@ class GUI:
             self.img_path = None
 
     def add_morphological_functions(self):
+        mo_oper_win = Toplevel(self.master)
+        mo_oper_win.title("New Window")
+        mo_oper_win.geometry("200x200")
+
         ########### erode button ###########
-        self.erodeButton = Button(self.master, text="erode image")
+        self.erodeButton = Button(mo_oper_win, text="erode image")
         self.erodeButton.bind('<Button-1>', self.erodeButtonClick)
         self.erodeButton.pack()
         ########################################
 
         ########### dilate button ###########
-        self.dilateButton = Button(self.master, text="dilate image")
+        self.dilateButton = Button(mo_oper_win, text="dilate image")
         self.dilateButton.bind('<Button-1>', self.dilateButtonClick)
         self.dilateButton.pack()
         ########################################
 
         ########### open button ###########
-        self.openButton = Button(self.master, text="open image")
+        self.openButton = Button(mo_oper_win, text="open image")
         self.openButton.bind('<Button-1>', self.openButtonClick)
         self.openButton.pack()
         ########################################
 
         ########### close button ###########
-        self.closeButton = Button(self.master, text="close image")
+        self.closeButton = Button(mo_oper_win, text="close image")
         self.closeButton.bind('<Button-1>', self.closeButtonClick)
         self.closeButton.pack()
         ########################################
@@ -82,7 +87,6 @@ class GUI:
         plt.subplot(122)
         plt.imshow(img_erosion, 'gray')
         plt.show()
-
 
     def dilateButtonClick(self, event):
         self.prepare_img()
