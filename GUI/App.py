@@ -20,6 +20,8 @@ class GUI:
     dilateButton = None
     openButton = None
     closeButton = None
+    setButton = None
+    m = n = 3
 
     def __init__(self):
         self.master = Tk()
@@ -51,7 +53,23 @@ class GUI:
     def add_morphological_functions(self):
         mo_oper_win = Toplevel(self.master)
         mo_oper_win.title("New Window")
-        mo_oper_win.geometry("200x200")
+        intro_label = Label(mo_oper_win,
+                            text="Please insert the size of the Structure Element you want: (default: 3x3)")
+        intro_label.pack()
+        m_label = Label(mo_oper_win,
+                        text="insert m:")
+        m_label.pack()
+        em = Entry(mo_oper_win, width=5, border=5)
+        em.pack()
+        n_label = Label(mo_oper_win,
+                        text="insert n:")
+        n_label.pack()
+        en = Entry(mo_oper_win, width=5, border=5)
+        en.pack()
+        ########### set MxN button ###########
+        self.setButton = Button(mo_oper_win, text="set", command=lambda: self.set_m_n(em, en))
+        self.setButton.pack()
+        ########################################
 
         ########### erode button ###########
         self.erodeButton = Button(mo_oper_win, text="erode image")
@@ -79,7 +97,7 @@ class GUI:
 
     def erodeButtonClick(self, event):
         self.prepare_img()
-        mask = np.ones((12, 12), np.uint8)
+        mask = np.ones((int(self.m), int(self.n)), np.uint8)
         img_erosion = Erosion.erosion(self.binary_img, mask)
         plt.figure('Input')
         plt.subplot(121)
@@ -90,7 +108,7 @@ class GUI:
 
     def dilateButtonClick(self, event):
         self.prepare_img()
-        mask = np.ones((12, 12), np.uint8)
+        mask = np.ones((int(self.m), int(self.n)), np.uint8)
         img_dilation = Dilation.dilation(self.binary_img, mask)
         plt.figure('Input')
         plt.subplot(121)
@@ -101,7 +119,7 @@ class GUI:
 
     def openButtonClick(self, event):
         self.prepare_img()
-        mask = np.ones((12, 12), np.uint8)
+        mask = np.ones((int(self.m), int(self.n)), np.uint8)
         img_opening = Dilation.dilation(Erosion.erosion(self.binary_img, mask), mask)
         plt.figure('Input')
         plt.subplot(121)
@@ -112,7 +130,7 @@ class GUI:
 
     def closeButtonClick(self, event):
         self.prepare_img()
-        mask = np.ones((12, 12), np.uint8)
+        mask = np.ones((int(self.m), int(self.n)), np.uint8)
         img_closing = Erosion.erosion(Dilation.dilation(self.binary_img, mask), mask)
         plt.figure('Input')
         plt.subplot(121)
@@ -126,6 +144,20 @@ class GUI:
         self.gray_img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
         (thresh, self.binary_img) = cv2.threshold(self.gray_img, 127, 255, cv2.THRESH_BINARY)  # 1D array
         self.binary_img = self.binary_img / 255
+
+    def set_m_n(self, m, n):
+        int_m = m.get()
+        int_n = n.get()
+        if m == 0 or m == "":
+            self.m = 3
+        elif n == 0 or n == "":
+            self.n = 3
+
+        else:
+            self.m = m.get()
+            self.n = n.get()
+
+
 
 
 if __name__ == '__main__':
