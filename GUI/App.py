@@ -4,11 +4,14 @@ import cv2
 from tkinter import messagebox
 from modules import Erosion
 from modules import Dilation
-from matplotlib import pyplot as plt
 import numpy as np
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib import pyplot as plt
 
 
 class GUI:
+
     img_path = None
     img = None
     gray_img = None
@@ -42,7 +45,7 @@ class GUI:
         self.loadfileButton.pack()
         ########################################
 
-        self.quitButton = Button(self.master, text="Exit", bg="red", fg="white", command=self.master.quit)
+        self.quitButton = Button(self.master, text="Exit", command=self.master.quit)
         self.quitButton.pack()
 
         self.master.mainloop()
@@ -113,7 +116,7 @@ class GUI:
         self.mgButton.grid(row=5, column=5)
         ########################################
 
-        self.quitButton = Button(mo_op_win, text="Exit", bg="red", fg="white", command=self.master.quit)
+        self.quitButton = Button(mo_op_win, text="Exit", command=self.master.quit)
         self.quitButton.grid(row=7, column=3)
 
     def erodeButtonClick(self, event):
